@@ -1,1 +1,448 @@
+#This is script where Ansible is installed on MASTER and other three servers are there: SERVER-1,2 and 3 
+#All the server is easily accesible using ansible and we can check details for this servers also
+#In the hosts files(/home/ubuntu/ansible/hosts ) details are there for servers and all variables for that servers here we take only installation  of python 
+ubuntu@ip-172-31-10-8:~$ sudo apt update 
+Hit:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+Get:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease [109 kB]
+Get:4 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [14.1 MB]
+Get:5 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:6 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe Translation-en [5652 kB]
+Get:7 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
+Get:8 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
+Get:9 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
+Get:10 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8372 B]
+Get:11 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [1103 kB]
+Get:12 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [239 kB]
+Get:13 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [16.0 kB]
+Get:14 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [1036 kB]
+Get:15 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [167 kB]
+Get:16 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 c-n-f Metadata [536 B]
+Get:17 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [995 kB]
+Get:18 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [218 kB]
+Get:19 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [22.0 kB]
+Get:20 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [41.6 kB]
+Get:21 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [9768 B]
+Get:22 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [472 B]
+Get:23 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [64.2 kB]
+Get:24 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [10.5 kB]
+Get:25 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [388 B]
+Get:26 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:27 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [27.8 kB]
+Get:28 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.4 kB]
+Get:29 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [644 B]
+Get:30 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
+Get:31 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [896 kB]
+Get:32 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [180 kB]
+Get:33 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [11.4 kB]
+Get:34 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [1016 kB]
+Get:35 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [164 kB]
+Get:36 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 c-n-f Metadata [536 B]
+Get:37 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [793 kB]
+Get:38 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [145 kB]
+Get:39 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [16.8 kB]
+Get:40 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [36.5 kB]
+Get:41 http://security.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [7060 B]
+Get:42 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [260 B]
+Fetched 27.9 MB in 5s (5552 kB/s)               
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+41 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ubuntu@ip-172-31-10-8:~$ sudo apt install ansible
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  ieee-data python3-argcomplete python3-dnspython python3-jmespath python3-kerberos python3-libcloud python3-lockfile python3-netaddr
+  python3-ntlm-auth python3-packaging python3-pycryptodome python3-requests-kerberos python3-requests-ntlm python3-requests-toolbelt
+  python3-selinux python3-simplejson python3-winrm python3-xmltodict
+Suggested packages:
+  cowsay sshpass python3-sniffio python3-trio python-lockfile-doc ipython3 python-netaddr-docs
+The following NEW packages will be installed:
+  ansible ieee-data python3-argcomplete python3-dnspython python3-jmespath python3-kerberos python3-libcloud python3-lockfile python3-netaddr
+  python3-ntlm-auth python3-packaging python3-pycryptodome python3-requests-kerberos python3-requests-ntlm python3-requests-toolbelt
+  python3-selinux python3-simplejson python3-winrm python3-xmltodict
+0 upgraded, 19 newly installed, 0 to remove and 41 not upgraded.
+Need to get 22.9 MB of archives.
+After this operation, 243 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-packaging all 21.3-1 [30.7 kB]
+Get:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-pycryptodome amd64 3.11.0+dfsg1-3build1 [1027 kB]
+Get:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-dnspython all 2.1.0-1ubuntu1 [123 kB]
+Get:4 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 ieee-data all 20210605.1 [1887 kB]
+Get:5 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-netaddr all 0.8.0-2 [309 kB]
+Get:6 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 ansible all 2.10.7+merged+base+2.10.8+dfsg-1 [17.5 MB]
+Get:7 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-argcomplete all 1.8.1-1.5 [27.2 kB]
+Get:8 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-jmespath all 0.10.0-1 [21.7 kB]
+Get:9 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-kerberos amd64 1.1.14-3.1build5 [23.0 kB]
+Get:10 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-lockfile all 1:0.12.2-2.2 [14.6 kB]
+Get:11 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-simplejson amd64 3.17.6-1build1 [54.7 kB]
+Get:12 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-libcloud all 3.2.0-2 [1554 kB]
+Get:13 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-ntlm-auth all 1.4.0-1 [20.4 kB]
+Get:14 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-requests-kerberos all 0.12.0-2 [11.9 kB]
+Get:15 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-requests-ntlm all 1.1.0-1.1 [6160 B]
+Get:16 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 python3-requests-toolbelt all 0.9.1-1 [38.0 kB]
+Get:17 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-selinux amd64 3.3-1build2 [159 kB]
+Get:18 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-xmltodict all 0.12.0-2 [12.6 kB]
+Get:19 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 python3-winrm all 0.3.0-2 [21.7 kB]
+Fetched 22.9 MB in 1s (27.0 MB/s)    
+Selecting previously unselected package python3-packaging.
+(Reading database ... 64726 files and directories currently installed.)
+Preparing to unpack .../00-python3-packaging_21.3-1_all.deb ...
+Unpacking python3-packaging (21.3-1) ...
+Selecting previously unselected package python3-pycryptodome.
+Preparing to unpack .../01-python3-pycryptodome_3.11.0+dfsg1-3build1_amd64.deb ...
+Unpacking python3-pycryptodome (3.11.0+dfsg1-3build1) ...
+Selecting previously unselected package python3-dnspython.
+Preparing to unpack .../02-python3-dnspython_2.1.0-1ubuntu1_all.deb ...
+Unpacking python3-dnspython (2.1.0-1ubuntu1) ...
+Selecting previously unselected package ieee-data.
+Preparing to unpack .../03-ieee-data_20210605.1_all.deb ...
+Unpacking ieee-data (20210605.1) ...
+Selecting previously unselected package python3-netaddr.
+Preparing to unpack .../04-python3-netaddr_0.8.0-2_all.deb ...
+Unpacking python3-netaddr (0.8.0-2) ...
+Selecting previously unselected package ansible.
+Preparing to unpack .../05-ansible_2.10.7+merged+base+2.10.8+dfsg-1_all.deb ...
+Unpacking ansible (2.10.7+merged+base+2.10.8+dfsg-1) ...
+Selecting previously unselected package python3-argcomplete.
+Preparing to unpack .../06-python3-argcomplete_1.8.1-1.5_all.deb ...
+Unpacking python3-argcomplete (1.8.1-1.5) ...
+Selecting previously unselected package python3-jmespath.
+Preparing to unpack .../07-python3-jmespath_0.10.0-1_all.deb ...
+Unpacking python3-jmespath (0.10.0-1) ...
+Selecting previously unselected package python3-kerberos.
+Preparing to unpack .../08-python3-kerberos_1.1.14-3.1build5_amd64.deb ...
+Unpacking python3-kerberos (1.1.14-3.1build5) ...
+Selecting previously unselected package python3-lockfile.
+Preparing to unpack .../09-python3-lockfile_1%3a0.12.2-2.2_all.deb ...
+Unpacking python3-lockfile (1:0.12.2-2.2) ...
+Selecting previously unselected package python3-simplejson.
+Preparing to unpack .../10-python3-simplejson_3.17.6-1build1_amd64.deb ...
+Unpacking python3-simplejson (3.17.6-1build1) ...
+Selecting previously unselected package python3-libcloud.
+Preparing to unpack .../11-python3-libcloud_3.2.0-2_all.deb ...
+Unpacking python3-libcloud (3.2.0-2) ...
+Selecting previously unselected package python3-ntlm-auth.
+Preparing to unpack .../12-python3-ntlm-auth_1.4.0-1_all.deb ...
+Unpacking python3-ntlm-auth (1.4.0-1) ...
+Selecting previously unselected package python3-requests-kerberos.
+Preparing to unpack .../13-python3-requests-kerberos_0.12.0-2_all.deb ...
+Unpacking python3-requests-kerberos (0.12.0-2) ...
+Selecting previously unselected package python3-requests-ntlm.
+Preparing to unpack .../14-python3-requests-ntlm_1.1.0-1.1_all.deb ...
+Unpacking python3-requests-ntlm (1.1.0-1.1) ...
+Selecting previously unselected package python3-requests-toolbelt.
+Preparing to unpack .../15-python3-requests-toolbelt_0.9.1-1_all.deb ...
+Unpacking python3-requests-toolbelt (0.9.1-1) ...
+Selecting previously unselected package python3-selinux.
+Preparing to unpack .../16-python3-selinux_3.3-1build2_amd64.deb ...
+Unpacking python3-selinux (3.3-1build2) ...
+Selecting previously unselected package python3-xmltodict.
+Preparing to unpack .../17-python3-xmltodict_0.12.0-2_all.deb ...
+Unpacking python3-xmltodict (0.12.0-2) ...
+Selecting previously unselected package python3-winrm.
+Preparing to unpack .../18-python3-winrm_0.3.0-2_all.deb ...
+Unpacking python3-winrm (0.3.0-2) ...
+Setting up python3-lockfile (1:0.12.2-2.2) ...
+Setting up python3-requests-toolbelt (0.9.1-1) ...
+Setting up python3-ntlm-auth (1.4.0-1) ...
+Setting up python3-pycryptodome (3.11.0+dfsg1-3build1) ...
+Setting up python3-kerberos (1.1.14-3.1build5) ...
+Setting up python3-simplejson (3.17.6-1build1) ...
+Setting up python3-xmltodict (0.12.0-2) ...
+Setting up python3-packaging (21.3-1) ...
+Setting up python3-jmespath (0.10.0-1) ...
+Setting up python3-requests-kerberos (0.12.0-2) ...
+Setting up ieee-data (20210605.1) ...
+Setting up python3-dnspython (2.1.0-1ubuntu1) ...
+Setting up python3-selinux (3.3-1build2) ...
+Setting up python3-argcomplete (1.8.1-1.5) ...
+Setting up python3-requests-ntlm (1.1.0-1.1) ...
+Setting up python3-libcloud (3.2.0-2) ...
+Setting up python3-netaddr (0.8.0-2) ...
+Setting up python3-winrm (0.3.0-2) ...
+Setting up ansible (2.10.7+merged+base+2.10.8+dfsg-1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...                                                                                                                                
+Scanning linux images...                                                                                                                             
 
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-10-8:~$ cd .ssh/
+ubuntu@ip-172-31-10-8:~/.ssh$ vim ansible_key
+ubuntu@ip-172-31-10-8:~/.ssh$ ls
+ansible_key  authorized_keys
+ubuntu@ip-172-31-10-8:~/.ssh$ sudo ssh -i ~/ssh/ansible_key ubunut@13.127.9.75
+Warning: Identity file /home/ubuntu/ssh/ansible_key not accessible: No such file or directory.
+The authenticity of host '13.127.9.75 (13.127.9.75)' can't be established.
+ED25519 key fingerprint is SHA256:jh343aiPoi3tvrNwK9ppA5Y3Xp9y63Quq7P5ZKyF+xA.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '13.127.9.75' (ED25519) to the list of known hosts.
+ubunut@13.127.9.75: Permission denied (publickey).
+ubuntu@ip-172-31-10-8:~/.ssh$ cd 
+ubuntu@ip-172-31-10-8:~$ sudo ssh -i ~/.ssh/ansible_key ubunut@13.127.9.75
+ubunut@13.127.9.75: Permission denied (publickey).
+ubuntu@ip-172-31-10-8:~$ cd .ssh/
+ubuntu@ip-172-31-10-8:~/.ssh$ ls
+ansible_key  authorized_keys
+ubuntu@ip-172-31-10-8:~/.ssh$ vi ansible_key 
+ubuntu@ip-172-31-10-8:~/.ssh$ cd
+ubuntu@ip-172-31-10-8:~$ sudo ssh -i ~/.ssh/ansible_key ubuntu@43.204.211.172
+The authenticity of host '43.204.211.172 (43.204.211.172)' can't be established.
+ED25519 key fingerprint is SHA256:+0eW+Tqkvu/1Z95GpnweweXoSU/9xI+naZVXAQ0EmIg.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '43.204.211.172' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 6.2.0-1012-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Oct 26 06:46:19 UTC 2023
+
+  System load:  0.0               Processes:             96
+  Usage of /:   20.5% of 7.57GB   Users logged in:       0
+  Memory usage: 21%               IPv4 address for eth0: 172.31.8.181
+  Swap usage:   0%
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-8-181:~$ exit
+logout
+Connection to 43.204.211.172 closed.
+ubuntu@ip-172-31-10-8:~$ cat /etc/ansible/hosts
+cat: /etc/ansible/hosts: No such file or directory
+ubuntu@ip-172-31-10-8:~$ mkdir ansible
+ubuntu@ip-172-31-10-8:~$ cd ansible/
+ubuntu@ip-172-31-10-8:~/ansible$ vim hosts
+ubuntu@ip-172-31-10-8:~/ansible$ ansible-inventory --list -y
+[WARNING]: No inventory was parsed, only implicit localhost is available
+all:
+  children:
+    ungrouped: {}
+ubuntu@ip-172-31-10-8:~/ansible$ pwd
+/home/ubuntu/ansible
+ubuntu@ip-172-31-10-8:~/ansible$ cd /home/ubuntu/ansible/
+ubuntu@ip-172-31-10-8:~/ansible$ ansible-inventory --list -y
+[WARNING]: No inventory was parsed, only implicit localhost is available
+all:
+  children:
+    ungrouped: {}
+ubuntu@ip-172-31-10-8:~/ansible$ ls
+hosts
+ubuntu@ip-172-31-10-8:~/ansible$ ansible-inventory --list -y -i
+usage: ansible-inventory [-h] [--version] [-v] [-i INVENTORY] [--vault-id VAULT_IDS]
+                         [--ask-vault-password | --vault-password-file VAULT_PASSWORD_FILES] [--playbook-dir BASEDIR] [--list] [--host HOST]
+                         [--graph] [-y] [--toml] [--vars] [--export] [--output OUTPUT_FILE]
+                         [host|group]
+ansible-inventory: error: argument -i/--inventory/--inventory-file: expected one argument
+ 
+usage: ansible-inventory [-h] [--version] [-v] [-i INVENTORY] [--vault-id VAULT_IDS]
+                         [--ask-vault-password | --vault-password-file VAULT_PASSWORD_FILES] [--playbook-dir BASEDIR] [--list] [--host HOST]
+                         [--graph] [-y] [--toml] [--vars] [--export] [--output OUTPUT_FILE]
+                         [host|group]
+
+positional arguments:
+  host|group
+
+options:
+  --ask-vault-password, --ask-vault-pass
+                        ask for vault password
+  --export              When doing an --list, represent in a way that is optimized for export,not as an accurate representation of how Ansible has
+                        processed it
+  --output OUTPUT_FILE  When doing --list, send the inventory to a file instead of to the screen
+  --playbook-dir BASEDIR
+                        Since this tool does not use playbooks, use this as a substitute playbook directory.This sets the relative path for many
+                        features including roles/ group_vars/ etc.
+  --toml                Use TOML format instead of default JSON, ignored for --graph
+  --vars                Add vars to graph display, ignored unless used with --graph
+  --vault-id VAULT_IDS  the vault identity to use
+  --vault-password-file VAULT_PASSWORD_FILES, --vault-pass-file VAULT_PASSWORD_FILES
+                        vault password file
+  --version             show program's version number, config file location, configured module search path, module location, executable location
+                        and exit
+  -h, --help            show this help message and exit
+  -i INVENTORY, --inventory INVENTORY, --inventory-file INVENTORY
+                        specify inventory host path or comma separated host list. --inventory-file is deprecated
+  -v, --verbose         verbose mode (-vvv for more, -vvvv to enable connection debugging)
+  -y, --yaml            Use YAML format instead of default JSON, ignored for --graph
+
+Actions:
+  One of following must be used on invocation, ONLY ONE!
+
+  --graph               create inventory graph, if supplying pattern it must be a valid group name
+  --host HOST           Output specific host info, works as inventory script
+  --list                Output all hosts info, works as inventory script
+
+Show Ansible inventory information, by default it uses the inventory script JSON format
+ ubuntu@ip-172-31-10-8:~/ansible$ ansible-inventory --list -y -i /home/ubuntu/ansible/hosts 
+all:
+  children:
+    servers:
+      hosts:
+        server1:
+          ansible_host: 13.235.91.49
+          ansible_python_interpreter: /usr/bin/python3
+        server2:
+          ansible_host: 43.204.211.172
+          ansible_python_interpreter: /usr/bin/python3
+        server3:
+          ansible_host: 13.127.9.75
+          ansible_python_interpreter: /usr/bin/python3
+    ungrouped: {}
+ubuntu@ip-172-31-10-8:~/ansible$ ansible all -m ping -i /home/ubuntu/ansible/hosts 
+The authenticity of host '13.235.91.49 (13.235.91.49)' can't be established.
+ED25519 key fingerprint is SHA256:h6ZLsqNvCJLyW7/qsxQf5OWVpaJ+ZyVESdE1r21m7/c.
+This key is not known by any other names
+The authenticity of host '43.204.211.172 (43.204.211.172)' can't be established.
+ED25519 key fingerprint is SHA256:+0eW+Tqkvu/1Z95GpnweweXoSU/9xI+naZVXAQ0EmIg.
+This key is not known by any other names
+The authenticity of host '13.127.9.75 (13.127.9.75)' can't be established.
+ED25519 key fingerprint is SHA256:jh343aiPoi3tvrNwK9ppA5Y3Xp9y63Quq7P5ZKyF+xA.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+server1 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Warning: Permanently added '13.235.91.49' (ED25519) to the list of known hosts.\r\nubuntu@13.235.91.49: Permission denied (publickey).",
+    "unreachable": true
+}
+yes
+server2 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Warning: Permanently added '43.204.211.172' (ED25519) to the list of known hosts.\r\nubuntu@43.204.211.172: Permission denied (publickey).",
+    "unreachable": true
+}
+yes
+server3 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: Warning: Permanently added '13.127.9.75' (ED25519) to the list of known hosts.\r\nubuntu@13.127.9.75: Permission denied (publickey).",
+    "unreachable": true
+}
+ubuntu@ip-172-31-10-8:~/ansible$ ansible all -m ping -i /home/ubuntu/ansible/hosts  --private-key=~/.ssh/ansible_key
+server2 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @\r\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\nPermissions 0664 for '/home/ubuntu/.ssh/ansible_key' are too open.\r\nIt is required that your private key files are NOT accessible by others.\r\nThis private key will be ignored.\r\nLoad key \"/home/ubuntu/.ssh/ansible_key\": bad permissions\r\nubuntu@43.204.211.172: Permission denied (publickey).",
+    "unreachable": true
+}
+server1 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @\r\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\nPermissions 0664 for '/home/ubuntu/.ssh/ansible_key' are too open.\r\nIt is required that your private key files are NOT accessible by others.\r\nThis private key will be ignored.\r\nLoad key \"/home/ubuntu/.ssh/ansible_key\": bad permissions\r\nubuntu@13.235.91.49: Permission denied (publickey).",
+    "unreachable": true
+}
+server3 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\n@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @\r\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\r\nPermissions 0664 for '/home/ubuntu/.ssh/ansible_key' are too open.\r\nIt is required that your private key files are NOT accessible by others.\r\nThis private key will be ignored.\r\nLoad key \"/home/ubuntu/.ssh/ansible_key\": bad permissions\r\nubuntu@13.127.9.75: Permission denied (publickey).",
+    "unreachable": true
+}
+ubuntu@ip-172-31-10-8:~/ansible$ cd ..
+ubuntu@ip-172-31-10-8:~$ cd .ssh/
+ubuntu@ip-172-31-10-8:~/.ssh$ chmod 700 ~/.ssh
+ubuntu@ip-172-31-10-8:~/.ssh$ chmod 600 ~/.ssh/ansible_key 
+ubuntu@ip-172-31-10-8:~/.ssh$ ansible all -m ping -i /home/ubuntu/ansible/hosts  --private-key=~/.ssh/ansible_key
+server2 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+server3 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+server1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+ubuntu@ip-172-31-10-8:~/.ssh$ ansible all -a "df -h" -i /home/ubuntu/ansible/hosts --private-key=~/.ssh/ansible_key 
+server3 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       7.6G  1.6G  6.0G  21% /
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  832K  190M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/xvda15     105M  6.1M   99M   6% /boot/efi
+tmpfs            95M  4.0K   95M   1% /run/user/1000
+server2 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       7.6G  1.6G  6.0G  21% /
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  832K  190M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/xvda15     105M  6.1M   99M   6% /boot/efi
+tmpfs            95M  4.0K   95M   1% /run/user/1000
+server1 | CHANGED | rc=0 >>
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root       7.6G  1.6G  6.0G  21% /
+tmpfs           475M     0  475M   0% /dev/shm
+tmpfs           190M  832K  190M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/xvda15     105M  6.1M   99M   6% /boot/efi
+tmpfs            95M  4.0K   95M   1% /run/user/1000
+ubuntu@ip-172-31-10-8:~/.ssh$ ansible all -a "free -h" -i /home/ubuntu/ansible/hosts --private-key=~/.ssh/ansible_key 
+server2 | CHANGED | rc=0 >>
+               total        used        free      shared  buff/cache   available
+Mem:           949Mi       174Mi       403Mi       0.0Ki       372Mi       619Mi
+Swap:             0B          0B          0B
+server3 | CHANGED | rc=0 >>
+               total        used        free      shared  buff/cache   available
+Mem:           949Mi       174Mi       402Mi       0.0Ki       372Mi       619Mi
+Swap:             0B          0B          0B
+server1 | CHANGED | rc=0 >>
+               total        used        free      shared  buff/cache   available
+Mem:           949Mi       174Mi       402Mi       0.0Ki       373Mi       619Mi
+Swap:             0B          0B          0B
+ubuntu@ip-172-31-10-8:~/.ssh$ ansible servers -a "uptime" -i /home/ubuntu/ansible/hosts --private-key=~/.ssh/ansible_key 
+server2 | CHANGED | rc=0 >>
+ 07:01:18 up 25 min,  1 user,  load average: 0.08, 0.02, 0.01
+server3 | CHANGED | rc=0 >>
+ 07:01:18 up 25 min,  1 user,  load average: 0.06, 0.04, 0.01
+server1 | CHANGED | rc=0 >>
+ 07:01:18 up 26 min,  1 user,  load average: 0.00, 0.00, 0.00
+ubuntu@ip-172-31-10-8:~/.ssh$ ls
+ansible_key  authorized_keys  known_hosts  known_hosts.old
+ubuntu@ip-172-31-10-8:~/.ssh$ pwd
+/home/ubuntu/.ssh
+ubuntu@ip-172-31-10-8:~/.ssh$ ^C
+ubuntu@ip-172-31-10-8:~/.ssh$ cd
+ubuntu@ip-172-31-10-8:~$ ls
+ansible
+ubuntu@ip-172-31-10-8:~$ ls ansible
+hosts
+ubuntu@ip-172-31-10-8:~$ cat ansible/hosts 
+[servers]
+
+server1 ansible_host=13.235.91.49
+server2 ansible_host=43.204.211.172
+server3 ansible_host=13.127.9.75
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3 
