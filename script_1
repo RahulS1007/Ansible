@@ -446,3 +446,4 @@ server3 ansible_host=13.127.9.75
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3 
+ 
