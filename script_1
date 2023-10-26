@@ -445,4 +445,4 @@ server2 ansible_host=43.204.211.172
 server3 ansible_host=13.127.9.75
 
 [all:vars]
-ansible_python_interpreter=/usr/bin/python3
+ansible_python_interpreter=/usr/bin/python3 
